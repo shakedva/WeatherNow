@@ -8,16 +8,16 @@ export default function SearchBar({ onLocationClicked }) {
     const [showSuggestions, setShowSuggestions] = useState(false);
     useEffect(() => {
         const getData = setTimeout(() => {
-            if (location === '' || cities.some(city => location === `${city.localizedName}, ${city.country}`)) {
+            if (location === '' || cities.some(location => location === `${location.localizedName}, ${location.country}`)) {
                 return;
             }
             fetch(`${autocompleteAddress}?apikey=${apiKey}&q=${location}`)
                 .then(res => res.json())
                 .then(json => {
-                    const suggestions = json.map(city => ({
-                        key: city.Key,
-                        localizedName: city.LocalizedName,
-                        country: city.Country.LocalizedName,
+                    const suggestions = json.map(location => ({
+                        key: location.Key,
+                        localizedName: location.LocalizedName,
+                        country: location.Country.LocalizedName,
                     }));
                     setCities(suggestions);
                     if (suggestions.length !== 0)
@@ -25,19 +25,19 @@ export default function SearchBar({ onLocationClicked }) {
                 }).catch(function () {
                     console.log(`servers are not available right now`)
                 })
-        }, 5000);
+        }, 1000);
 
         return () => clearTimeout(getData);
     }, [location]);
 
     function handleLocationChange(event) {
-        let city = event.target.value;
-        city = city.trim();
-        setLocation(city);
+        let location = event.target.value;
+        // location = location.trim();
+        setLocation(location);
     }
-    function handleSuggestionClicked(city) {
-        onLocationClicked(city.key);
-        setLocation(`${city.localizedName}, ${city.country}`);
+    function handleSuggestionClicked(location) {
+        onLocationClicked(location);
+        setLocation(`${location.localizedName}, ${location.country}`);
         setShowSuggestions(false);
     }
     return (
@@ -51,14 +51,14 @@ export default function SearchBar({ onLocationClicked }) {
                     onClick={() => { if (cities.length != 0) setShowSuggestions(true)}}
                 />
                 <ul className={`dropdown-menu ${showSuggestions ? 'show' : undefined}`} id="list-group">
-                    {cities.map(city => {
+                    {cities.map(location => {
                         return (
                             <li
                                 className="list-group-item"
-                                key={city.key} >
+                                key={location.key} >
                                 <a className="dropdown-item"
-                                    onClick={() => handleSuggestionClicked(city)}>
-                                    {`${city.localizedName}, ${city.country}`}
+                                    onClick={() => handleSuggestionClicked(location)}>
+                                    {`${location.localizedName}, ${location.country}`}
                                 </a>
                             </li>
                         )
