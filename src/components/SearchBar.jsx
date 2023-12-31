@@ -5,25 +5,23 @@ const apiKey = 'aID1uGelP7d2tREmiHtpwKlPUNty1Be6'
 export default function SearchBar({ onLocationClicked }) {
     const [location, setLocation] = useState('');
     const [cities, setCities] = useState([]);
-
+    const [showSuggestions, setShowSuggestions] = useState(false);
     useEffect(() => {
         const getData = setTimeout(() => {
-            if (location === '' || cities.includes(location)) {
+            if (location === '' || cities.some(city => location === `${city.localizedName}, ${city.country}`)) {
                 return;
             }
             fetch(`${autocompleteAddress}?apikey=${apiKey}&q=${location}`)
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json)
-
-                    const suggestions = []
-                    json.forEach(city => {
-                        console.log(`debounce: ${city.LocalizedName}, ${city.Country.ID}`)
-                        const cityData = `${city.LocalizedName}, ${city.Country.ID}`
-                        suggestions.push(cityData)
-                    });
+                    const suggestions = json.map(city => ({
+                        key: city.Key,
+                        localizedName: city.LocalizedName,
+                        country: city.Country.LocalizedName,
+                    }));
                     setCities(suggestions);
-
+                    if (suggestions.length !== 0)
+                        setShowSuggestions(true);
                 }).catch(function () {
                     console.log(`servers are not available right now`)
                 })
@@ -36,9 +34,11 @@ export default function SearchBar({ onLocationClicked }) {
         let city = event.target.value;
         city = city.trim();
         setLocation(city);
-        if (cities.includes(city)) {
-            onLocationClicked(city);
-        }
+    }
+    function handleSuggestionClicked(city) {
+        onLocationClicked(city.key);
+        setLocation(`${city.localizedName}, ${city.country}`);
+        setShowSuggestions(false);
     }
     return (
         <div className="d-flex justify-content-center">
@@ -48,19 +48,22 @@ export default function SearchBar({ onLocationClicked }) {
                     type="text" list="cities"
                     value={location}
                     onChange={handleLocationChange}
+                    onClick={() => { if (cities.length != 0) setShowSuggestions(true)}}
                 />
-                <datalist id="cities">
+                <ul className={`dropdown-menu ${showSuggestions ? 'show' : undefined}`} id="list-group">
                     {cities.map(city => {
                         return (
-                            <option
-                                key={city}
-                                value={city}
-                            >
-                                {city}
-                            </option>
+                            <li
+                                className="list-group-item"
+                                key={city.key} >
+                                <a className="dropdown-item"
+                                    onClick={() => handleSuggestionClicked(city)}>
+                                    {`${city.localizedName}, ${city.country}`}
+                                </a>
+                            </li>
                         )
                     })}
-                </datalist>
+                </ul>
             </div>
         </div>
     )
