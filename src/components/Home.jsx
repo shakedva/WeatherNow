@@ -1,17 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useLocation } from 'react-router-dom';
 import SearchBar from "./SearchBar.jsx"
 import Forecast from "./Forecast.jsx"
+
 const DEFAULT_LOCATION = {
     key: '215854',
     localizedName: 'Tel Aviv',
     country: 'Israel',
 }
-export default function Home() {
-    const [selectedLocation, setSelectedLocation] = useState(DEFAULT_LOCATION)
+export default function Home({location = DEFAULT_LOCATION}) {
+    const { state } = useLocation();
+    const [selectedLocation, setSelectedLocation] = useState(location)
     function handleLocationClicked(location){
         console.log(`Option clicked: ${location}`)
         setSelectedLocation(location);
     }
+    useEffect(() => {
+        if(state) {
+            setSelectedLocation(state.location);
+        }
+    }, [location]);
+
     return (
         <div id="home">
             <SearchBar onLocationClicked={handleLocationClicked}/>
