@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { currentConditionsAddress, apiKey } from "../util";
-import { FavoriteLocationsContext } from "../favorites/FavoriteLocationsContext.jsx";
-
+import { currentConditionsAddress, apiKey, convertCelsiusToFahrenheit } from "../util";
+import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.jsx";
+import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 const DEFAULT_DETAILS = {
     text: '',
     temperature: 0,
@@ -12,7 +12,7 @@ export default function LocationDetails({ location }) {
     const [savedLocation, setSavedLocation] = useState(false);
 
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
-
+    const { temperatureUnit } = useContext(TemperatureContext);
     // Check if the location is saved as favorite
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
@@ -43,7 +43,7 @@ export default function LocationDetails({ location }) {
             addToFavorites(location);
         }
     }
-    
+
     let bookmark = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16" onClick={handleSaveLocation}>
         <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
     </svg>
@@ -55,7 +55,7 @@ export default function LocationDetails({ location }) {
         <div className="card mt-3" id="location-details">
             <div className="card-body">
                 <p>{location.localizedName}</p>
-                {<p>{details.temperature}°c</p>}
+                { temperatureUnit === 'celsius' ? <p>{details.temperature}°C</p> : <p>{convertCelsiusToFahrenheit(details.temperature)}°F</p>  }
                 <p>{details.text}</p>
                 {bookmark}
             </div>

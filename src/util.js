@@ -9,3 +9,6 @@ export function convertISO8601ToDayOfTheWeek(originalDate) {
     const dayNumber = date.getDay();
     return daysOfTheWeek[dayNumber];
 }
+export function convertCelsiusToFahrenheit(temperature) {
+    return (temperature * (9/5) + 32).toFixed(2);
+}
