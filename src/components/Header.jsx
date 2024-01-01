@@ -2,8 +2,8 @@ import { Link, Outlet } from "react-router-dom";
 
 export default function Header() {
     return (
-        <div id='header'>
-            <header className="navbar bg-body-tertiary">
+        <div>
+            <header className="navbar bg-body-tertiary"  id='header'>
                 <div className="container-fluid">
                     <span className="navbar-text">
                         Weather App
