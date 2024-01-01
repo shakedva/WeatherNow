@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-const autocompleteAddress = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete'
-const apiKey = 'aID1uGelP7d2tREmiHtpwKlPUNty1Be6'
+import { autocompleteAddress, apiKey } from "../util";
 
 export default function SearchBar({ onLocationClicked }) {
     const [location, setLocation] = useState('');
@@ -32,7 +31,6 @@ export default function SearchBar({ onLocationClicked }) {
 
     function handleLocationChange(event) {
         let location = event.target.value;
-        // location = location.trim();
         setLocation(location);
     }
     function handleSuggestionClicked(location) {
@@ -40,16 +38,31 @@ export default function SearchBar({ onLocationClicked }) {
         setLocation(`${location.localizedName}, ${location.country}`);
         setShowSuggestions(false);
     }
+    function handleClearClicked() {
+        setLocation("");
+    }
     return (
         <div className="d-flex justify-content-center">
-            <div className="col-5">
-                <input
-                    className="form-control"
-                    type="text" list="cities"
-                    value={location}
-                    onChange={handleLocationChange}
-                    onClick={() => { if (cities.length != 0) setShowSuggestions(true)}}
-                />
+            <div className="col-7">
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    </span>
+                    <input list="cities"
+                        type="text"
+                        className="form-control clearable-input"
+                        placeholder="Enter Location"
+                        aria-label="Location"
+                        aria-describedby="basic-addon1" 
+                        value={location}
+                        onChange={handleLocationChange}
+                        onClick={() => { if (cities.length != 0) setShowSuggestions(true) }}    
+                        />
+                    <span className="input-group-text" onClick={handleClearClicked}>&times;</span>
+                </div>
                 <ul className={`dropdown-menu ${showSuggestions ? 'show' : undefined}`} id="list-group">
                     {cities.map(location => {
                         return (

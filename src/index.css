@@ -16,5 +16,9 @@ code {
   margin: auto;
   width: 50%;
   padding: 10px;
-  
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #eaeaea;
+  cursor: pointer;
 }

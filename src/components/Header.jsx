@@ -8,14 +8,16 @@ export default function Header() {
                     <span className="navbar-text">
                         Weather App
                     </span>
-                    <div className="d-flex">
+                    <div className="btn-group" role="group" aria-label="Default button group">
                         <Link
                             to='/'
+                            type="button"
                             className="btn btn-outline-success">
                             Home
                         </Link>
                         <Link
                             to='/favorites'
+                            type="button"
                             className="btn btn-outline-success">
                             Favorites
                         </Link>
