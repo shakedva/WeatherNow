@@ -12,7 +12,11 @@ export default function WeeklyForecast({ location }) {
     useEffect(() => {
         const fetchWeeklyForecast = async () => {
             try {
-                const response = await fetch(`${fiveDayForecastAddress}${location.key}?apikey=${apiKey}&metric=true`);
+                
+                const response = await fetch(`${fiveDayForecastAddress}${location.key}?` + new URLSearchParams({
+                    apikey: apiKey,
+                    metric: true.toString()
+                }));
                 const json = await response.json();
                 const headlineText = json.Headline.Text;
                 const dailyForecasts = json.DailyForecasts.map(day => ({

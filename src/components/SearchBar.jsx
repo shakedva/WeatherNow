@@ -10,7 +10,11 @@ export default function SearchBar({ onLocationClicked }) {
             if (location === '' || cities.some(location => location === `${location.localizedName}, ${location.country}`)) {
                 return;
             }
-            fetch(`${autocompleteAddress}?apikey=${apiKey}&q=${location}`)
+
+            fetch(`${autocompleteAddress}?` + new URLSearchParams({
+                apikey: apiKey,
+                q: location
+            }))
                 .then(res => res.json())
                 .then(json => {
                     const suggestions = json.map(location => ({

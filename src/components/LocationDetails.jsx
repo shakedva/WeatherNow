@@ -19,7 +19,10 @@ export default function LocationDetails({ location }) {
         setSavedLocation(isSaved);
         const fetchCurrentConditions = async () => {
             try {
-                const response = await fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`);
+                
+                const response = await fetch(`${currentConditionsAddress}${location.key}?` + new URLSearchParams({
+                    apikey: apiKey
+                }));
                 const json = await response.json();
                 if (json.length > 0) {
                     const observation = json[0];

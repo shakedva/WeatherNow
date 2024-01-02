@@ -23,8 +23,11 @@ export default function Home({location = DEFAULT_LOCATION}) {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
 
-                setSelectedLocation(DEFAULT_LOCATION);
-                fetch(`${geopositionAddress}?apikey=${apiKey}&q=${lat}%2C${lon}`)
+                // setSelectedLocation(DEFAULT_LOCATION);
+                fetch(`${geopositionAddress}?` + new URLSearchParams({
+                    apikey: apiKey,
+                    q: `${lat},${lon}`
+                }))
                 .then(res => res.json())
                 .then(json => {
                     const currentLocation = {
