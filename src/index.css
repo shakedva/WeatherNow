@@ -1,6 +1,6 @@
-body {
+/* body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont,'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,7 +10,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
+
 
 #home, #favorites {
   margin: auto;
@@ -25,4 +26,40 @@ code {
 
 .link {
   text-decoration: none;
+}
+
+#light {
+  background-color: #ffdcbc;
+}
+#dark {
+  background-color: #d8e4fc;
+}
+
+#light .navbar-text {
+  color: #e5451c;
+  font-weight: bold;
+}
+#location-details {
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+#light #location-details {
+  /* background-image: url("./assets/58081.jpg"); */
+  /* background-image: url("./assets/Mountain Landscape In Orange Tone.svg"); */
+  /* background-image: url("./assets/Mountain Landscape In Orange Tone 400 300.svg"); */
+  /* background-image: url("./assets/Mountain Landscape In Orange Tone resized2.svg"); */
+  background-image: url("./assets/Mountain Landscape In Orange Tone resized.svg");
+  background-size: cover; 
+  /* background-size: contain;  */
+  background-repeat: no-repeat;
+  /* background-size: auto; */
+}
+
+
+#light #location-details .card-title {
+  color: #e5451c;
+  font-size: 5rem;
 }

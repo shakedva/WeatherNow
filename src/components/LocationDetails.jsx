@@ -2,6 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { currentConditionsAddress, apiKey, convertCelsiusToFahrenheit } from "../util";
 import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.jsx";
 import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
+import bookmarkImg from '../assets/bookmark.svg';
+import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
+
 const DEFAULT_DETAILS = {
     text: '',
     temperature: 0,
@@ -57,20 +60,18 @@ export default function LocationDetails({ location }) {
         }
     }
 
-    let bookmark = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16" onClick={handleSaveLocation}>
-        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
-    </svg>
+    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32"/>
     if (savedLocation)
-        bookmark = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16" onClick={handleSaveLocation}>
-            <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-        </svg>
+        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32"/>
+    const temperature =  temperatureUnit === 'celsius' ? `${details.temperature}°C` : `${convertCelsiusToFahrenheit(details.temperature)}°F`
     return (
         <div className="card mt-3" id="location-details">
             <div className="card-body">
+                <div class="d-flex flex-row-reverse"> {bookmark} </div>
+                <h1 className="card-title">{temperature}</h1>
                 <p>{location.localizedName}</p>
-                { temperatureUnit === 'celsius' ? <p>{details.temperature}°C</p> : <p>{convertCelsiusToFahrenheit(details.temperature)}°F</p>  }
                 <p>{details.text}</p>
-                {bookmark}
+                
             </div>
         </div>
     );
