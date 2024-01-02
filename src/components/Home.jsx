@@ -22,6 +22,8 @@ export default function Home({location = DEFAULT_LOCATION}) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
+
+                setSelectedLocation(DEFAULT_LOCATION);
                 fetch(`${geopositionAddress}?apikey=${apiKey}&q=${lat}%2C${lon}`)
                 .then(res => res.json())
                 .then(json => {

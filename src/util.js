@@ -13,3 +13,16 @@ export function convertISO8601ToDayOfTheWeek(originalDate) {
 export function convertCelsiusToFahrenheit(temperature) {
     return (temperature * (9/5) + 32).toFixed(2);
 }
+export function clearStorageAfterTtlMinutes(ttlMinutes = 60) {
+    const now = new Date().getTime();
+    const setupTime = localStorage.getItem('setupTime');
+    console.log(setupTime);
+    if (setupTime == null) {
+        localStorage.setItem('setupTime', now)
+    } else {
+        if(now-setupTime > ttlMinutes*60*1000) {
+            localStorage.clear()
+            localStorage.setItem('setupTime', now);
+        }
+    }
+}

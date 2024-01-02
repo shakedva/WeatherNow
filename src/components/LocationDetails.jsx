@@ -13,13 +13,10 @@ export default function LocationDetails({ location }) {
 
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
     const { temperatureUnit } = useContext(TemperatureContext);
-    // Check if the location is saved as favorite
+
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         setSavedLocation(isSaved);
-    }, [favorites, location]);
-
-    useEffect(() => {
         const fetchCurrentConditions = async () => {
             try {
                 const response = await fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`);
@@ -40,26 +37,13 @@ export default function LocationDetails({ location }) {
         };
         const storedWeatherDetails =  localStorage.getItem(`weatherDetails_${location.key}`);
         if (storedWeatherDetails) {
-            console.log('fetching from storage... ')
+            console.log('fetching location details from storage... ')
             setDetails(JSON.parse(storedWeatherDetails));
           } else {
+            console.log('fetching location details from storage... ')
             fetchCurrentConditions();
           }
-
-        // fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         if (json.length > 0) {
-        //             const observation = json[0];
-        //             setDetails({
-        //                 text: observation.WeatherText,
-        //                 temperature: observation.Temperature.Metric.Value,
-        //             });
-        //         }
-        //     }).catch(function () {
-        //         console.log(`servers are not available right now`)
-        //     })
-    }, [location]);
+    }, [favorites, location]);
 
     function handleSaveLocation() {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);

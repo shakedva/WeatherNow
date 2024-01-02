@@ -4,8 +4,11 @@ import Favorites from './components/Favorites.jsx';
 import Home from './components/Home.jsx';
 import FavoriteLocationsProvider from "./contexts/FavoriteLocationsContext.jsx";
 import TemperatureProvider from "./contexts/TemperatureContext.jsx";
+import { clearStorageAfterTtlMinutes } from "./util.js";
 import './App.css';
+
 function App() {
+  clearStorageAfterTtlMinutes();
   return (
     <FavoriteLocationsProvider>
       <TemperatureProvider>
