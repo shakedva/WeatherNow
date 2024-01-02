@@ -12,7 +12,6 @@ export default function Home({location = DEFAULT_LOCATION}) {
     const { state } = useLocation();
     const [selectedLocation, setSelectedLocation] = useState(location)
     function handleLocationClicked(location){
-        console.log(`Option clicked: ${location}`)
         setSelectedLocation(location);
     }
     useEffect(() => {

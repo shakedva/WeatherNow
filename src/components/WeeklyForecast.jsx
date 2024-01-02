@@ -11,23 +11,52 @@ const DEFAULT_FORECAST = {
 export default function WeeklyForecast({ location }) {
     const [forecast, setForecast] = useState(DEFAULT_FORECAST);
     useEffect(() => {
-        fetch(`${fiveDayForecastAddress}${location.key}?apikey=${apiKey}&metric=true`)
-        .then(res => res.json())
-        .then(json => {
-            const headlineText = json.Headline.Text;
-            const dailyForecasts = json.DailyForecasts.map(day => ({
-                date: convertISO8601ToDayOfTheWeek(day.Date),
-                temperature: day.Temperature.Minimum.Value,
-            }));
-            const updatedForecast = {
-                headlineText,
-                dailyForecasts
+        const fetchWeeklyForecast = async () => {
+            try {
+                const response = await fetch(`${fiveDayForecastAddress}${location.key}?apikey=${apiKey}&metric=true`);
+                const json = await response.json();
+                const headlineText = json.Headline.Text;
+                const dailyForecasts = json.DailyForecasts.map(day => ({
+                    date: convertISO8601ToDayOfTheWeek(day.Date),
+                    temperature: day.Temperature.Minimum.Value,
+                }));
+                const updatedForecast = {
+                    headlineText,
+                    dailyForecasts
+                }
+                    localStorage.setItem(`forecast_${location.key}`, JSON.stringify(updatedForecast));
+                    setForecast(updatedForecast);
+                }
+            catch(error) {
+                console.log(`servers are not available right now`)
             }
-            setForecast(updatedForecast);
+        };
+        const storedForecast =  localStorage.getItem(`forecast_${location.key}`);
+        if (storedForecast) {
+            console.log('fetching forecast from storage... ')
+            setForecast(JSON.parse(storedForecast));
+        } else {
+            fetchWeeklyForecast();
+        }
+            
 
-        }).catch(function () {
-            console.log(`servers are not available right now`)
-        })
+        // fetch(`${fiveDayForecastAddress}${location.key}?apikey=${apiKey}&metric=true`)
+        // .then(res => res.json())
+        // .then(json => {
+        //     const headlineText = json.Headline.Text;
+        //     const dailyForecasts = json.DailyForecasts.map(day => ({
+        //         date: convertISO8601ToDayOfTheWeek(day.Date),
+        //         temperature: day.Temperature.Minimum.Value,
+        //     }));
+        //     const updatedForecast = {
+        //         headlineText,
+        //         dailyForecasts
+        //     }
+        //     setForecast(updatedForecast);
+
+        // }).catch(function () {
+        //     console.log(`servers are not available right now`)
+        // })
     }, [location]);
 
     return (

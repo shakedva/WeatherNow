@@ -20,19 +20,45 @@ export default function LocationDetails({ location }) {
     }, [favorites, location]);
 
     useEffect(() => {
-        fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`)
-            .then(res => res.json())
-            .then(json => {
+        const fetchCurrentConditions = async () => {
+            try {
+                const response = await fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`);
+                const json = await response.json();
                 if (json.length > 0) {
                     const observation = json[0];
-                    setDetails({
+                    const observationDetails = {
                         text: observation.WeatherText,
                         temperature: observation.Temperature.Metric.Value,
-                    });
+                    }
+                    localStorage.setItem(`weatherDetails_${location.key}`, JSON.stringify(observationDetails));
+                    setDetails(observationDetails);
                 }
-            }).catch(function () {
+            }
+            catch(error) {
                 console.log(`servers are not available right now`)
-            })
+            }
+        };
+        const storedWeatherDetails =  localStorage.getItem(`weatherDetails_${location.key}`);
+        if (storedWeatherDetails) {
+            console.log('fetching from storage... ')
+            setDetails(JSON.parse(storedWeatherDetails));
+          } else {
+            fetchCurrentConditions();
+          }
+
+        // fetch(`${currentConditionsAddress}${location.key}?apikey=${apiKey}`)
+        //     .then(res => res.json())
+        //     .then(json => {
+        //         if (json.length > 0) {
+        //             const observation = json[0];
+        //             setDetails({
+        //                 text: observation.WeatherText,
+        //                 temperature: observation.Temperature.Metric.Value,
+        //             });
+        //         }
+        //     }).catch(function () {
+        //         console.log(`servers are not available right now`)
+        //     })
     }, [location]);
 
     function handleSaveLocation() {
