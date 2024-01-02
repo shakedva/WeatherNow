@@ -1,0 +1,34 @@
+
+#location-details {
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: none;
+  }
+  
+  #dark #location-details {
+    /* background-image: url("./assets/Mountain Layer View In Blue Tone.svg"); */
+    background-image: url("../assets/Mountain Layer View In Blue Tone.png");
+    background-size: cover; 
+    background-repeat: no-repeat;
+  }
+  
+  #dark #location-details {
+    color: #d8e4fc;
+  }
+  
+  #light #location-details {
+    background-image: url("../assets/Mountain Landscape In Orange Tone resized.svg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+  }
+  
+  #light #location-details .card-title {
+    color: #e5451c;
+  }
+  
+  #light #location-details .card-secondary-title {
+    font-weight: bold;
+  }
+  

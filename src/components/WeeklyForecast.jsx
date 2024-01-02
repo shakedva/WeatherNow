@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fiveDayForecastAddress, apiKey, convertISO8601ToDayOfTheWeek } from "../util";
 import DailyCard from "./DailyCard.jsx";
+import './WeeklyForecast.css'
 
 const DEFAULT_FORECAST = {
     headlineText: '',
@@ -21,7 +22,8 @@ export default function WeeklyForecast({ location }) {
                 const headlineText = json.Headline.Text;
                 const dailyForecasts = json.DailyForecasts.map(day => ({
                     date: convertISO8601ToDayOfTheWeek(day.Date),
-                    temperature: day.Temperature.Minimum.Value,
+                    minimumTemperature: day.Temperature.Minimum.Value,
+                    maximumTemperature: day.Temperature.Maximum.Value,
                 }));
                 const updatedForecast = {
                     headlineText,
@@ -45,11 +47,11 @@ export default function WeeklyForecast({ location }) {
     }, [location]);
 
     return (
-        <div>
-            <h2>{forecast.headlineText}</h2>
+        <div id="weekly-forecast">
+            <h4 className="forecast-title">{forecast.headlineText}</h4>
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-3">
                         {forecast.dailyForecasts.map(day => {
                             return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
                         })}

@@ -1,18 +1,15 @@
-/* body {
+body {
   margin: 0;
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont,'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Comic Sans MS';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffdcbc;
+}
+html, body {
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
-#home, #favorites {
+#favorites, #search-bar, #location-details {
   margin: auto;
   width: 60%;
   padding: 10px;
@@ -38,41 +35,10 @@ code {
   font-weight: bold;
 }
 
-#location-details {
-  border-radius: 1rem;
-  padding: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  border-style: none;
-}
-
-#dark #location-details {
-  /* background-image: url("./assets/Mountain Layer View In Blue Tone.svg"); */
-  background-image: url("./assets/Mountain Layer View In Blue Tone.png");
-  background-size: cover; 
-  background-repeat: no-repeat;
-}
-
-#dark #location-details {
-  color: #d8e4fc;
-}
-
-#light #location-details {
-  background-image: url("./assets/Mountain Landscape In Orange Tone resized.svg");
-  background-size: cover; 
-  background-repeat: no-repeat;
-}
-
-#light #location-details .card-title {
-  color: #e5451c;
-}
-
-#light #location-details .card-secondary-title {
-  font-weight: bold;
-}
-
-
 @media screen and (min-device-width: 1024px) { 
+  #forecast {
+    width: 100%;
+  }
   #location-details .card-title {
     font-size: 5rem;
   }
@@ -82,8 +48,11 @@ code {
   }
 }
 @media screen and (min-device-width: 481px) and (max-device-width: 1024px) { 
-  #home, #favorites {
+  #forecast {
     width: 100%;
+  }
+  #favorites, #search-bar, #location-details {
+    width: 75%;
   }
   #location-details .card-title {
     font-size: 4rem;
@@ -95,8 +64,11 @@ code {
 }
 
 @media only screen and (max-device-width: 480px) {
-  #home, #favorites {
+  #forecast {
     width: 100%;
+  }
+  #home, #favorites, #search-bar, #location-details {
+    width: 90%;
   }
   #location-details .card-title {
     font-size: 2rem;

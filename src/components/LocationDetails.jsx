@@ -4,7 +4,7 @@ import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.j
 import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import bookmarkImg from '../assets/bookmark.svg';
 import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
-
+import './LocationDetails.css'
 const DEFAULT_DETAILS = {
     text: '',
     temperature: 0,

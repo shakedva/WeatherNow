@@ -4,13 +4,16 @@ import { convertCelsiusToFahrenheit } from "../util.js";
 
 export default function DailyCard({ dailyForecast }) {
     const { temperatureUnit } = useContext(TemperatureContext);
+    const minimumTemp = dailyForecast.minimumTemperature;
+    const maximumTemp = dailyForecast.maximumTemperature;
+    const temperature = temperatureUnit === 'celsius' ?
+        `${minimumTemp}° - ${maximumTemp}° ` :
+        `${convertCelsiusToFahrenheit(minimumTemp)}° - ${convertCelsiusToFahrenheit(maximumTemp)}°`
     return (
-        <div className="card">
+        <div className="card daily-card">
             <div className="card-body">
-                <h5 className="card-title">{dailyForecast.date}</h5>
-                <div className="card-text">
-                    { temperatureUnit === 'celsius' ? <p>{dailyForecast.temperature}°C</p> : <p>{convertCelsiusToFahrenheit(dailyForecast.temperature)}°F</p>  }
-                </div>
+                <h5 className="card-title daily-card-title">{dailyForecast.date}</h5>
+                <div className="card-text"> {temperature} </div>
             </div>
         </div>
     )

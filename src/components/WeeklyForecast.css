@@ -1,0 +1,23 @@
+h4 {
+    text-align: center;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.daily-card {
+    margin-bottom: 0.25rem;
+    border-radius: 0.75rem;
+}
+
+#light .daily-card{
+    background-color: #fcf4e7;;
+}
+#dark .daily-card{
+    background-color:  #234067;
+    color: #d8e4fc;
+}
+#dark .forecast-title {
+    color: #d8e4fc;
+}
