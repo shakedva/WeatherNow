@@ -1,0 +1,37 @@
+#light .dropdown-menu > li > a:hover,
+#light .dropdown-menu > li > a:focus {
+  background-color: #f6dfba;
+  cursor: pointer;
+}
+
+#light input, #light .input-group-text {
+    border-style: none;
+    background-color: #fcf4e7;
+}
+
+#light .dropdown-menu {
+  background-color: #fcf4e7 ;
+}
+
+
+#dark .dropdown-menu > li > a:hover,
+#dark .dropdown-menu > li > a:focus {
+  background-color: #0d1e31;
+  cursor: pointer;
+}
+
+#dark input, #dark .input-group-text {
+    border-style: none ;
+    background-color:  #234067;
+    color: #d8e4fc;
+}
+#dark .dropdown-menu {
+    background-color: #234067 ;
+}
+#dark a {
+    color: #d8e4fc;
+}
+#dark ::placeholder {
+    color: #d8e4fc;
+}
+

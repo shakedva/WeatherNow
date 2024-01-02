@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { autocompleteAddress, apiKey } from "../util";
+import './SearchBar.css';
 
 export default function SearchBar({ onLocationClicked }) {
     const [location, setLocation] = useState('');
@@ -57,10 +58,9 @@ export default function SearchBar({ onLocationClicked }) {
                     </span>
                     <input list="cities"
                         type="text"
-                        className="form-control clearable-input"
+                        className="form-control"
                         placeholder="Enter Location"
                         aria-label="Location"
-                        aria-describedby="basic-addon1"
                         value={location}
                         onChange={handleLocationChange}
                         onClick={() => { if (cities.length != 0) setShowSuggestions(true) }}

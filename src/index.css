@@ -12,16 +12,10 @@ code {
     monospace;
 } */
 
-
 #home, #favorites {
   margin: auto;
-  width: 50%;
+  width: 60%;
   padding: 10px;
-}
-
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-  background-color: #eaeaea;
-  cursor: pointer;
 }
 
 .link {
@@ -32,34 +26,82 @@ code {
   background-color: #ffdcbc;
 }
 #dark {
-  background-color: #d8e4fc;
+  background-color: #0d1e31
 }
 
+#dark .navbar-text {
+  color: #d8e4fc;
+  font-weight: bold;
+}
 #light .navbar-text {
   color: #e5451c;
   font-weight: bold;
 }
+
 #location-details {
   border-radius: 1rem;
   padding: 2rem;
   margin-left: 5rem;
   margin-right: 5rem;
+  border-style: none;
+}
+
+#dark #location-details {
+  /* background-image: url("./assets/Mountain Layer View In Blue Tone.svg"); */
+  background-image: url("./assets/Mountain Layer View In Blue Tone.png");
+  background-size: cover; 
+  background-repeat: no-repeat;
+}
+
+#dark #location-details {
+  color: #d8e4fc;
 }
 
 #light #location-details {
-  /* background-image: url("./assets/58081.jpg"); */
-  /* background-image: url("./assets/Mountain Landscape In Orange Tone.svg"); */
-  /* background-image: url("./assets/Mountain Landscape In Orange Tone 400 300.svg"); */
-  /* background-image: url("./assets/Mountain Landscape In Orange Tone resized2.svg"); */
   background-image: url("./assets/Mountain Landscape In Orange Tone resized.svg");
   background-size: cover; 
-  /* background-size: contain;  */
   background-repeat: no-repeat;
-  /* background-size: auto; */
 }
-
 
 #light #location-details .card-title {
   color: #e5451c;
-  font-size: 5rem;
+}
+
+#light #location-details .card-secondary-title {
+  font-weight: bold;
+}
+
+
+@media screen and (min-device-width: 1024px) { 
+  #location-details .card-title {
+    font-size: 5rem;
+  }
+  #location-details .card-secondary-title {
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-device-width: 481px) and (max-device-width: 1024px) { 
+  #home, #favorites {
+    width: 100%;
+  }
+  #location-details .card-title {
+    font-size: 4rem;
+  }
+  #location-details .card-secondary-title {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-device-width: 480px) {
+  #home, #favorites {
+    width: 100%;
+  }
+  #location-details .card-title {
+    font-size: 2rem;
+  }
+  #location-details .card-secondary-title {
+    font-size: 1rem;
+  }
 }
