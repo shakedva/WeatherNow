@@ -69,5 +69,6 @@ export function getWeatherIcon (icon) {
         44: 'thunderstorms-snow.svg',
     }
     
-    return iconNumberToImg[icon] || 'unknown.svg';
+    return iconNumberToImg[icon];
+    // || 'unknown.svg';
 }

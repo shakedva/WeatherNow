@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fiveDayForecastAddress, apiKey, convertISO8601ToDayOfTheWeek } from "../util";
 import DailyCard from "./DailyCard.jsx";
+import WeatherChart from "./WeatherChart.jsx";
 import './WeeklyForecast.css'
 
 const DEFAULT_FORECAST = {
@@ -48,18 +49,19 @@ export default function WeeklyForecast({ location }) {
     }, [location]);
 
     return (
-        <div id="card weekly-forecast">
-            <div className="card-body">
-                <h4 className="forecast-title">{forecast.headlineText}</h4>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-4">
-                            {forecast.dailyForecasts.map(day => {
-                                return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
-                            })}
-                        </div>
+        <div id="weekly-forecast">
+            <h4 className="forecast-title">{forecast.headlineText}</h4>
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-12 col-md-7 col-lg-4">
+                        {forecast.dailyForecasts.map(day => {
+                            return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
+                        })}
                     </div>
                 </div>
+            </div>
+            <div style={{width: 700}}>
+                <WeatherChart forecast={forecast.dailyForecasts}/>
             </div>
         </div>
     )
