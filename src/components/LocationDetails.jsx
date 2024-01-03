@@ -43,10 +43,8 @@ export default function LocationDetails({ location }) {
         };
         const storedWeatherDetails =  localStorage.getItem(`weatherDetails_${location.key}`);
         if (storedWeatherDetails) {
-            console.log('fetching location details from storage... ')
             setDetails(JSON.parse(storedWeatherDetails));
           } else {
-            console.log('fetching location details from storage... ')
             fetchCurrentConditions();
           }
     }, [favorites, location]);

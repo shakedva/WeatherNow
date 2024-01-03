@@ -40,10 +40,8 @@ export default function WeeklyForecast({ location }) {
         };
         const storedForecast = localStorage.getItem(`forecast_${location.key}`);
         if (storedForecast) {
-            console.log('fetching forecast from storage... ')
             setForecast(JSON.parse(storedForecast));
         } else {
-            console.log('fetching forecast from server... ')
             fetchWeeklyForecast();
         }
     }, [location]);
