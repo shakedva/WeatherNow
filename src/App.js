@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Header from './components/Header.jsx';
 import Favorites from './components/Favorites.jsx';
 import Home from './components/Home.jsx';
@@ -14,14 +14,15 @@ function App() {
     <ThemeProvider>
       <FavoriteLocationsProvider>
         <TemperatureProvider>
-          <BrowserRouter>
+          <HashRouter>
+            {/*Use HashRouter instead of BrowserRouter due to GitHub pages deploy requirements */}
             <Routes>
               <Route path="/" element={<Header />}>
                 <Route index element={<Home />} />
                 <Route path="favorites" element={<Favorites />} />
               </Route>
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </TemperatureProvider>
       </FavoriteLocationsProvider>
     </ThemeProvider>
