@@ -13,7 +13,7 @@ export default function WeeklyForecast({ location }) {
     useEffect(() => {
         const fetchWeeklyForecast = async () => {
             try {
-                
+
                 const response = await fetch(`${fiveDayForecastAddress}${location.key}?` + new URLSearchParams({
                     apikey: apiKey,
                     metric: true.toString()
@@ -24,19 +24,20 @@ export default function WeeklyForecast({ location }) {
                     date: convertISO8601ToDayOfTheWeek(day.Date),
                     minimumTemperature: day.Temperature.Minimum.Value,
                     maximumTemperature: day.Temperature.Maximum.Value,
+                    icon: day.Day.Icon,
                 }));
                 const updatedForecast = {
                     headlineText,
                     dailyForecasts
                 }
-                    localStorage.setItem(`forecast_${location.key}`, JSON.stringify(updatedForecast));
-                    setForecast(updatedForecast);
-                }
-            catch(error) {
+                localStorage.setItem(`forecast_${location.key}`, JSON.stringify(updatedForecast));
+                setForecast(updatedForecast);
+            }
+            catch (error) {
                 console.log(`servers are not available right now`)
             }
         };
-        const storedForecast =  localStorage.getItem(`forecast_${location.key}`);
+        const storedForecast = localStorage.getItem(`forecast_${location.key}`);
         if (storedForecast) {
             console.log('fetching forecast from storage... ')
             setForecast(JSON.parse(storedForecast));
@@ -47,14 +48,16 @@ export default function WeeklyForecast({ location }) {
     }, [location]);
 
     return (
-        <div id="weekly-forecast">
-            <h4 className="forecast-title">{forecast.headlineText}</h4>
-            <div className="container">
-                <div className="row">
-                    <div className="col-3">
-                        {forecast.dailyForecasts.map(day => {
-                            return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
-                        })}
+        <div id="card weekly-forecast">
+            <div className="card-body">
+                <h4 className="forecast-title">{forecast.headlineText}</h4>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-12 col-md-7 col-lg-4">
+                            {forecast.dailyForecasts.map(day => {
+                                return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

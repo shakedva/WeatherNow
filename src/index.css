@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Comic Sans MS';
+  font-family:'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffdcbc;
@@ -36,9 +36,6 @@ html, body {
 }
 
 @media screen and (min-device-width: 1024px) { 
-  #forecast {
-    width: 100%;
-  }
   #location-details .card-title {
     font-size: 5rem;
   }
@@ -48,9 +45,6 @@ html, body {
   }
 }
 @media screen and (min-device-width: 481px) and (max-device-width: 1024px) { 
-  #forecast {
-    width: 100%;
-  }
   #favorites, #search-bar, #location-details {
     width: 75%;
   }
@@ -64,9 +58,6 @@ html, body {
 }
 
 @media only screen and (max-device-width: 480px) {
-  #forecast {
-    width: 100%;
-  }
   #home, #favorites, #search-bar, #location-details {
     width: 90%;
   }

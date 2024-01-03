@@ -5,10 +5,9 @@
     margin-left: auto;
     margin-right: auto;
     border-style: none;
-  }
+}
   
   #dark #location-details {
-    /* background-image: url("./assets/Mountain Layer View In Blue Tone.svg"); */
     background-image: url("../assets/Mountain Layer View In Blue Tone.png");
     background-size: cover; 
     background-repeat: no-repeat;

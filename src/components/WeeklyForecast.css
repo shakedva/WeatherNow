@@ -9,11 +9,20 @@ h4 {
 .daily-card {
     margin-bottom: 0.25rem;
     border-radius: 0.75rem;
+    border-style: none;
+}
+.daily-card-icon {
+    height: 64px;
+    width: 64px;
+}
+.daily-card-title {
+    font-weight: bold;
 }
 
 #light .daily-card{
     background-color: #fcf4e7;;
 }
+
 #dark .daily-card{
     background-color:  #234067;
     color: #d8e4fc;
@@ -21,3 +30,4 @@ h4 {
 #dark .forecast-title {
     color: #d8e4fc;
 }
+
