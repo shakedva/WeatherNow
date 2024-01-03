@@ -1,0 +1,13 @@
+.navbar {
+    margin-bottom: 1rem;
+}
+
+#light .navbar {
+    background-color: #fcf4e7;
+}
+#dark .navbar {
+    background-color: #234067;
+}
+#dark .btn-outline-secondary {
+    color: white !important;
+}

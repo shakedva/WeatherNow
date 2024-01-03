@@ -5,10 +5,8 @@ import LocationDetails from "./LocationDetails.jsx";
 
 export default function Favorites() {
     const { favorites } = useContext(FavoriteLocationsContext);
-    const navigate = useNavigate();
     return (
         <div id="favorites">
-            <h2>Favorites</h2>
             <div>
                 {favorites.map(favLocation => {
                     return (
@@ -19,6 +17,5 @@ export default function Favorites() {
                 })}
             </div>
         </div>
-
     )
 }

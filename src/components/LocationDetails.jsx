@@ -67,10 +67,10 @@ export default function LocationDetails({ location }) {
     return (
         <div className="card mt-3" id="location-details">
             <div className="card-body">
-                <div className="d-flex flex-row-reverse"> {bookmark} </div>
+                <div className="d-flex flex-row-reverse bookmark"> {bookmark} </div>
                 <h1 className="card-title">{temperature}</h1>
                 <h3 className="card-secondary-title">{location.localizedName}</h3>
-                <p>{details.text}</p>
+                <p className="card-text">{details.text}</p>
             </div>
         </div>
     );
