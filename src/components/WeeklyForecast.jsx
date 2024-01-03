@@ -48,20 +48,22 @@ export default function WeeklyForecast({ location }) {
         }
     }, [location]);
 
+    
+
     return (
         <div id="weekly-forecast">
-            <h4 className="forecast-title">{forecast.headlineText}</h4>
             <div className="container">
+                <h4 className="forecast-title">{forecast.headlineText}</h4>
                 <div className="row">
-                    <div className="col-sm-12 col-md-7 col-lg-4">
+                    <div className="col-sm-12 col-lg-4 pb-3">
                         {forecast.dailyForecasts.map(day => {
                             return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
                         })}
                     </div>
+                    <div className="weather-chart col-sm-12 col-lg-8">
+                        <WeatherChart forecast={forecast.dailyForecasts}/>  
+                    </div>
                 </div>
-            </div>
-            <div style={{width: 700}}>
-                <WeatherChart forecast={forecast.dailyForecasts}/>
             </div>
         </div>
     )

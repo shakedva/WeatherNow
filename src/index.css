@@ -3,7 +3,7 @@ body {
   font-family:'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffdcbc;
+  /* background-color: #ffdcbc; */
 }
 html, body {
   height: 100%;

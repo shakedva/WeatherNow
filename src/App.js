@@ -8,7 +8,6 @@ import ThemeProvider from "./contexts/ThemeContext.jsx";
 import { clearStorageAfterTtlMinutes } from "./util.js";
 import './App.css';
 
-
 function App() {
   clearStorageAfterTtlMinutes();
   return (

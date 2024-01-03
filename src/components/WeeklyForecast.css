@@ -1,4 +1,4 @@
-h4 {
+.forecast-title {
     text-align: center;
     font-size: 1.5rem;
     padding-bottom: 5px;
@@ -18,10 +18,20 @@ h4 {
 .daily-card-title {
     font-weight: bold;
 }
+canvas {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #d8e4fc;
+}
 
 #light .daily-card{
-    background-color: #fcf4e7;;
+    background-color: #fcf4e7;
 }
+
+#light canvas {
+    background-color: #fcf4e7;
+}
+
 
 #dark .daily-card{
     background-color:  #234067;
@@ -30,4 +40,8 @@ h4 {
 #dark .forecast-title {
     color: #d8e4fc;
 }
+#dark canvas {
+    background-color: #234067;
+}
+
 

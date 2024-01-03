@@ -3,11 +3,13 @@ import { useContext } from "react";
 import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import { ThemeContext } from "../contexts/ThemeContext.jsx";
 
+
+
 export default function Header() {
     const { temperatureUnit, toggleTemperatureUnit } = useContext(TemperatureContext);
     const { theme, toggleTheme } = useContext(ThemeContext);
     const unit = (temperatureUnit === 'celsius') ? '°C' : '°F';
-
+    document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
     return (
         <div id={theme}>
             <header className='navbar d-flex' id='header'>
