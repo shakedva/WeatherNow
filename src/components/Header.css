@@ -1,7 +1,9 @@
 .navbar {
     margin-bottom: 1rem;
 }
-
+.active {
+    font-weight: bold;
+}
 #light .navbar {
     background-color: #fcf4e7;
 }

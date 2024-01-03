@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import { ThemeContext } from "../contexts/ThemeContext.jsx";
@@ -13,18 +13,32 @@ export default function Header() {
     const unit = (temperatureUnit === 'celsius') ? '°C' : '°F';
     document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
 
-    let themeImg = <img src={lightModeImg} width="24" height="24"/>
+    let themeImg = <img src={lightModeImg} width="24" height="24" />
     if (theme === 'dark')
-        themeImg = <img src={darkModeImg} width="24" height="24"/>
+        themeImg = <img src={darkModeImg} width="24" height="24" />
 
     return (
         <div id={theme}>
             <header className='navbar d-flex sticky-top' id='header'>
                 <div className="container-fluid">
-                    <span className="navbar-text p-1">
+                    <span className="navbar-text navbar-brand p-1">
                         Weather App
                     </span>
-                    <div className="btn-group me-auto ms-2 toggle-buttons" role="group" aria-label="Default button group">
+                    <div className="me-auto ms-2 toggle-buttons" role="group" aria-label="Default button group">
+                        <NavLink
+                            to='/'
+                            className="link navbar-brand">
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to='/favorites'
+                            className="link navbar-brand">
+                            Favorites
+                        </NavLink>
+                    </div>
+
+                    <div className="btn-group me-0" role="group" aria-label="Default button group">
+
                         <button
                             className="btn btn-outline-secondary"
                             onClick={toggleTemperatureUnit}>
@@ -33,24 +47,9 @@ export default function Header() {
                         <button
                             className="btn btn-outline-secondary"
                             onClick={toggleTheme}>
-                                {themeImg}
+                            {themeImg}
                         </button>
-                    </div>
-                    
-                    <div className="btn-group me-0" role="group" aria-label="Default button group">
-                        <Link
-                            to='/'
-                            type="button"
-                            selected
-                            className="btn btn-outline-success">
-                            Home
-                        </Link>
-                        <Link
-                            to='/favorites'
-                            type="button"
-                            className="btn btn-outline-success">
-                            Favorites
-                        </Link>
+
                     </div>
                 </div>
             </header>
