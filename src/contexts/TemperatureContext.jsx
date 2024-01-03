@@ -7,8 +7,11 @@ export default function TemperatureProvider({ children }) {
     const toggleTemperatureUnit = () => {
         setTemperatureUnit((prevTempUnit) => (prevTempUnit === 'celsius' ? 'fahrenheit' : 'celsius'));
       };
+    const getTemperatureUnit = () => {
+        return temperatureUnit === 'celsius' ? '°C' : '°F';
+    }
     return (
-        <TemperatureContext.Provider value={{temperatureUnit, toggleTemperatureUnit}}>
+        <TemperatureContext.Provider value={{temperatureUnit, toggleTemperatureUnit, getTemperatureUnit}}>
             {children}
         </TemperatureContext.Provider>
     )

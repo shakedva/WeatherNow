@@ -8,9 +8,8 @@ import './Header.css'
 
 
 export default function Header() {
-    const { temperatureUnit, toggleTemperatureUnit } = useContext(TemperatureContext);
+    const { toggleTemperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
     const { theme, toggleTheme } = useContext(ThemeContext);
-    const unit = (temperatureUnit === 'celsius') ? '°C' : '°F';
     document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
 
     let themeImg = <img src={lightModeImg} width="24" height="24" />
@@ -42,7 +41,7 @@ export default function Header() {
                         <button
                             className="btn btn-outline-secondary"
                             onClick={toggleTemperatureUnit}>
-                            {unit}
+                            {getTemperatureUnit()}
                         </button>
                         <button
                             className="btn btn-outline-secondary"

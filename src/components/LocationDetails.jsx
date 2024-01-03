@@ -15,7 +15,7 @@ export default function LocationDetails({ location }) {
     const [savedLocation, setSavedLocation] = useState(false);
 
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
-    const { temperatureUnit } = useContext(TemperatureContext);
+    const { temperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
 
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
@@ -63,7 +63,8 @@ export default function LocationDetails({ location }) {
     let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32"/>
     if (savedLocation)
         bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32"/>
-    const temperature =  temperatureUnit === 'celsius' ? `${details.temperature}°C` : `${convertCelsiusToFahrenheit(details.temperature)}°F`
+    const unit = getTemperatureUnit();
+    const temperature =  temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
     return (
         <div className="card mt-3" id="location-details">
             <div className="card-body">
