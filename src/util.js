@@ -1,4 +1,4 @@
-export const apiKey = process.env.REACT_APP_API_KEY;
+export const apiKey = 'aID1uGelP7d2tREmiHtpwKlPUNty1Be6';
 export const currentConditionsAddress = 'https://dataservice.accuweather.com/currentconditions/v1/';
 export const autocompleteAddress = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete';
 export const fiveDayForecastAddress = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';

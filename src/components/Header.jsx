@@ -35,9 +35,7 @@ export default function Header() {
                             Favorites
                         </NavLink>
                     </div>
-
                     <div className="btn-group me-0" role="group" aria-label="Default button group">
-
                         <button
                             className="btn btn-outline-secondary"
                             onClick={toggleTemperatureUnit}>
@@ -48,7 +46,6 @@ export default function Header() {
                             onClick={toggleTheme}>
                             {themeImg}
                         </button>
-
                     </div>
                 </div>
             </header>
