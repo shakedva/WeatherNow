@@ -24,11 +24,15 @@ html, body {
   background-color: #0d1e31
 }
 
-#dark .navbar-text, #dark #error-page {
+#dark .navbar-text {
   color: #d8e4fc;
   font-weight: bold;
 }
-#light .navbar-text , #light #error-page{
+#dark #error-page {
+  color: black;
+  font-weight: bold;
+}
+#light .navbar-text{
   color: #e5451c;
   font-weight: bold;
 }
@@ -42,7 +46,10 @@ html, body {
   margin-top: 3rem;
   text-align: center;
 }
-
+#light #error-page {
+  color: black;
+  font-weight: bold;
+}
 
 @media screen and (min-device-width: 1024px) { 
   #location-details .card-title {

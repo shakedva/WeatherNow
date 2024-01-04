@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fiveDayForecastAddress, apiKey, convertISO8601ToDayOfTheWeek } from "../util";
 import DailyCard from "./DailyCard.jsx";
 import WeatherChart from "./WeatherChart.jsx";
+import ErrorPage from "./ErrorPage.jsx"
 import './WeeklyForecast.css'
 
 const DEFAULT_FORECAST = {
@@ -11,6 +12,8 @@ const DEFAULT_FORECAST = {
 
 export default function WeeklyForecast({ location }) {
     const [forecast, setForecast] = useState(DEFAULT_FORECAST);
+    const [error, setError] = useState(false);
+
     useEffect(() => {
         const fetchWeeklyForecast = async () => {
             try {
@@ -33,9 +36,10 @@ export default function WeeklyForecast({ location }) {
                 }
                 localStorage.setItem(`forecast_${location.key}`, JSON.stringify(updatedForecast));
                 setForecast(updatedForecast);
+                setError(false);
             }
             catch (error) {
-                console.log(`servers are not available right now`)
+                setError(true);
             }
         };
         const storedForecast = localStorage.getItem(`forecast_${location.key}`);
@@ -46,22 +50,26 @@ export default function WeeklyForecast({ location }) {
         }
     }, [location]);
 
-    
+
 
     return (
         <div id="weekly-forecast">
             <div className="container">
-                <h4 className="forecast-title">{forecast.headlineText}</h4>
-                <div className="row">
-                    <div className="col-sm-12 col-lg-4 pb-3">
-                        {forecast.dailyForecasts.map(day => {
-                            return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
-                        })}
-                    </div>
-                    <div className="weather-chart col-sm-12 col-lg-8">
-                        <WeatherChart forecast={forecast.dailyForecasts}/>  
-                    </div>
-                </div>
+                {error ? <ErrorPage>Failed to fetch the weekly forecast. Please try again later.</ErrorPage> :
+                    <>
+                        <h4 className="forecast-title">{forecast.headlineText}</h4>
+                        <div className="row">
+                            <div className="col-sm-12 col-lg-4 pb-3">
+                                {forecast.dailyForecasts.map(day => {
+                                    return <DailyCard key={`forecast-${location.key}-${day.date}`} dailyForecast={day} />
+                                })}
+                            </div>
+                            <div className="weather-chart col-sm-12 col-lg-8">
+                                <WeatherChart forecast={forecast.dailyForecasts} />
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
         </div>
     )

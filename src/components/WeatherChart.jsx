@@ -62,8 +62,6 @@ const WeatherChart = ({ forecast }) => {
         },
       ],
     });
-    console.log(chartOptions)
-
   }, [forecast, theme]);
   return <Line data={formattedForecast} options={chartOptions}/>;
 };

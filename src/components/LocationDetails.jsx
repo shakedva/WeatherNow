@@ -5,6 +5,7 @@ import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import bookmarkImg from '../assets/bookmark.svg';
 import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
 import './LocationDetails.css'
+import ErrorPage from "./ErrorPage.jsx";
 const DEFAULT_DETAILS = {
     text: '',
     temperature: 0,
@@ -13,7 +14,7 @@ const DEFAULT_DETAILS = {
 export default function LocationDetails({ location }) {
     const [details, setDetails] = useState(DEFAULT_DETAILS);
     const [savedLocation, setSavedLocation] = useState(false);
-
+    const [error, setError] = useState(false);
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
     const { temperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
 
@@ -22,7 +23,7 @@ export default function LocationDetails({ location }) {
         setSavedLocation(isSaved);
         const fetchCurrentConditions = async () => {
             try {
-                
+
                 const response = await fetch(`${currentConditionsAddress}${location.key}?` + new URLSearchParams({
                     apikey: apiKey
                 }));
@@ -35,18 +36,19 @@ export default function LocationDetails({ location }) {
                     }
                     localStorage.setItem(`weatherDetails_${location.key}`, JSON.stringify(observationDetails));
                     setDetails(observationDetails);
+                    setError(false);
                 }
             }
-            catch(error) {
-                console.log(`servers are not available right now`)
+            catch (error) {
+                setError(true);
             }
         };
-        const storedWeatherDetails =  localStorage.getItem(`weatherDetails_${location.key}`);
+        const storedWeatherDetails = localStorage.getItem(`weatherDetails_${location.key}`);
         if (storedWeatherDetails) {
             setDetails(JSON.parse(storedWeatherDetails));
-          } else {
+        } else {
             fetchCurrentConditions();
-          }
+        }
     }, [favorites, location]);
 
     function handleSaveLocation() {
@@ -58,18 +60,23 @@ export default function LocationDetails({ location }) {
         }
     }
 
-    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32"/>
+    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" />
     if (savedLocation)
-        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32"/>
+        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" />
     const unit = getTemperatureUnit();
-    const temperature =  temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
+    const temperature = temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
     return (
         <div className="card mt-3" id="location-details">
             <div className="card-body">
-                <div className="d-flex flex-row-reverse bookmark"> {bookmark} </div>
-                <h1 className="card-title">{temperature}</h1>
-                <h3 className="card-secondary-title">{location.localizedName}</h3>
-                <p className="card-text">{details.text}</p>
+                {error ?
+                    <ErrorPage>Failed to fetch current conditions. Please try again later.</ErrorPage> :
+                    <>
+                        <div className="d-flex flex-row-reverse bookmark"> {bookmark} </div>
+                        <h1 className="card-title">{temperature}</h1>
+                        <h3 className="card-secondary-title">{location.localizedName}</h3>
+                        <p className="card-text">{details.text}</p>
+                    </>
+                }
             </div>
         </div>
     );
