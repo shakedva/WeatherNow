@@ -10,8 +10,8 @@ export default function Favorites() {
             <div className="row">
                 {favorites.map(favLocation => {
                     return (
-                        <div className="col-4">
-                            <Link className="link" to="/" key={`fav-${favLocation.key}`} state={{ location: favLocation }}>
+                        <div className="col-4"  key={`fav-${favLocation.key}`} >
+                            <Link className="link" to="/" state={{ location: favLocation }}>
                                 <LocationDetails location={favLocation} />
                             </Link>
                         </div>
