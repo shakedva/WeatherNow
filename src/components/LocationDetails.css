@@ -29,3 +29,47 @@
 #light #location-details .card-secondary-title {
   font-weight: bold;
 }
+
+#favorites .card-text {
+  visibility: hidden;
+}
+#favorites #location-details .card-title {
+  font-size: 1.5rem;
+}
+#favorites #location-details .card-secondary-title {
+  font-size: 2rem;
+}
+#light #favorites #location-details {
+  background: rgb(246,206,159);
+  background: linear-gradient(175deg, rgba(246,206,159,1) 0%, rgba(244,194,135,1) 46%); 
+}
+#dark #favorites #location-details {
+  background: rgb(39,72,115);
+  background: linear-gradient(175deg, rgba(39,72,115,1) 0%, rgba(26,39,64,1) 88%); 
+}
+
+@media screen and (min-device-width: 1024px) { 
+  #favorites #location-details .card-title {
+    font-size: 1.5rem;
+  }
+  #favorites #location-details .card-secondary-title {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-device-width: 481px) and (max-device-width: 1024px) { 
+  #favorites #location-details .card-title {
+    font-size: 1rem;
+  }
+  #favorites #location-details .card-secondary-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-device-width: 480px) {
+  #favorites #location-details .card-title {
+    font-size: 0.75rem;
+  }
+  #favorites #location-details .card-secondary-title {
+    font-size: 1rem;
+  }
+}

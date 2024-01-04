@@ -32,6 +32,13 @@ html, body {
   color: #e5451c;
   font-weight: bold;
 }
+#favorites #location-details, #favorites Link {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  text-align: center;
+}
+
 
 @media screen and (min-device-width: 1024px) { 
   #location-details .card-title {

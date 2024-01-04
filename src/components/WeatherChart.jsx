@@ -5,9 +5,6 @@ import { ThemeContext } from '../contexts/ThemeContext.jsx';
 
 const WeatherChart = ({ forecast }) => {
   const { theme } = useContext(ThemeContext);
-  // const [minimumBgColor, setMinimumBgColor] = useState(theme === 'light' ? '#F29E38' : '#CCE8F5');
-  // const [maximumBgColor, setMaximumBgColor] = useState(theme === 'light' ? '#e5451c' : '#0d1e31');
-
   const [formattedForecast, setFormattedForecast] = useState({
     labels: [],
     datasets: [{

@@ -7,12 +7,14 @@ export default function Favorites() {
     const { favorites } = useContext(FavoriteLocationsContext);
     return (
         <div id="favorites">
-            <div>
+            <div className="row">
                 {favorites.map(favLocation => {
                     return (
-                        <Link className="link" to="/" key={`fav-${favLocation.key}`} state={{ location: favLocation }}>
-                            <LocationDetails location={favLocation} />
-                        </Link>
+                        <div className="col-4">
+                            <Link className="link" to="/" key={`fav-${favLocation.key}`} state={{ location: favLocation }}>
+                                <LocationDetails location={favLocation} />
+                            </Link>
+                        </div>
                     )
                 })}
             </div>
