@@ -1,8 +1,9 @@
-export const apiKey = 'x5SN5T7HFN8EDHhiIYF4GJ6HbmvESGjC';
+export const apiKey = process.env.REACT_APP_API_KEY;
 export const currentConditionsAddress = 'https://dataservice.accuweather.com/currentconditions/v1/';
 export const autocompleteAddress = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete';
 export const fiveDayForecastAddress = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';
 export const geopositionAddress = 'https://dataservice.accuweather.com/locations/v1/cities/geoposition/search'
+
 
 export function convertISO8601ToDayOfTheWeek(originalDate) {
     const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -70,5 +71,4 @@ export function getWeatherIcon (icon) {
     }
     
     return iconNumberToImg[icon] || 'clear-day.svg';
-    // || 'unknown.svg';
 }

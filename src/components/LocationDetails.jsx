@@ -17,7 +17,6 @@ export default function LocationDetails({ location }) {
     const [error, setError] = useState(false);
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
     const { temperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
-
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         setSavedLocation(isSaved);

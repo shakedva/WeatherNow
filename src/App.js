@@ -9,6 +9,7 @@ import { clearStorageAfterTtlMinutes } from "./util.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import './App.css';
 
+
 function App() {
   clearStorageAfterTtlMinutes();
   return (

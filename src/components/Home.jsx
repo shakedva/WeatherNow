@@ -24,24 +24,23 @@ export default function Home({location = DEFAULT_LOCATION}) {
                 const lon = position.coords.longitude;
 
                 setSelectedLocation(DEFAULT_LOCATION);
-                fetch(`${geopositionAddress}?` + new URLSearchParams({
-                    apikey: apiKey,
-                    q: `${lat},${lon}`
-                }))
-                .then(res => res.json())
-                .then(json => {
-                    const currentLocation = {
-                        key: json.Key,
-                        localizedName: json.LocalizedName,
-                        country: json.Country.LocalizedName,
-                    };
-                    setSelectedLocation(currentLocation);
-                }).catch(function () {
-                    console.log(`servers are not available right now`)
-                    setSelectedLocation(DEFAULT_LOCATION);
-                })
+                // fetch(`${geopositionAddress}?` + new URLSearchParams({
+                //     apikey: apiKey,
+                //     q: `${lat},${lon}`
+                // }))
+                // .then(res => res.json())
+                // .then(json => {
+                //     const currentLocation = {
+                //         key: json.Key,
+                //         localizedName: json.LocalizedName,
+                //         country: json.Country.LocalizedName,
+                //     };
+                //     setSelectedLocation(currentLocation);
+                // }).catch(function () {
+                //     console.log(`servers are not available right now`)
+                //     setSelectedLocation(DEFAULT_LOCATION);
+                // })
             }, (error) => {
-                console.warn(`ERROR(${error.code}): ${error.message}`);
                 setSelectedLocation(DEFAULT_LOCATION);
             });
         }
