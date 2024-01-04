@@ -6,6 +6,7 @@ import FavoriteLocationsProvider from "./contexts/FavoriteLocationsContext.jsx";
 import TemperatureProvider from "./contexts/TemperatureContext.jsx";
 import ThemeProvider from "./contexts/ThemeContext.jsx";
 import { clearStorageAfterTtlMinutes } from "./util.js";
+import ErrorPage from "./components/ErrorPage.jsx";
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<Header />}>
                 <Route index element={<Home />} />
                 <Route path="favorites" element={<Favorites />} />
+                <Route path="*" element={<ErrorPage/>}/>
               </Route>
             </Routes>
           </HashRouter>
