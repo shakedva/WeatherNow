@@ -2,10 +2,13 @@ import { useState, useEffect } from "react"
 import { autocompleteAddress, apiKey } from "../util";
 import './SearchBar.css';
 
+const DEBOUNCE_DELAY = 500;
+
 export default function SearchBar({ onLocationClicked }) {
     const [location, setLocation] = useState('');
     const [cities, setCities] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    // Fetch suggestion from autocomplete api when input changes after debounce
     useEffect(() => {
         const getData = setTimeout(() => {
             if (location === '' || cities.some(location => location === `${location.localizedName}, ${location.country}`)) {
@@ -29,7 +32,7 @@ export default function SearchBar({ onLocationClicked }) {
                 }).catch(function () {
                     console.log(`servers are not available right now`)
                 })
-        }, 1000);
+        }, DEBOUNCE_DELAY);
 
         return () => clearTimeout(getData);
     }, [location]);
@@ -41,7 +44,7 @@ export default function SearchBar({ onLocationClicked }) {
     function handleSuggestionClicked(location) {
         onLocationClicked(location);
         setLocation(`${location.localizedName}, ${location.country}`);
-        setShowSuggestions(false);
+        setShowSuggestions(false); // Close dropdown
     }
     function handleClearClicked() {
         setLocation("");

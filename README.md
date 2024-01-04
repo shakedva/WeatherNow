@@ -17,6 +17,6 @@ This is a simple, responsive web app built with React that allows users to check
 
 ## Screenshots
 
-<img src="public/screenshots/light_home.png" width="70%" height="70%">
-<img src="public/screenshots/dark_home.png" width="70%" height="70%">
-<img src="public/screenshots/dark_fav.png" width="70%" height="70%">
+<img src="public/screenshots/light_home.png" width="70%" height="70%" alt="Light home page">
+<img src="public/screenshots/dark_home.png" width="70%" height="70%" alt="Dark home page">
+<img src="public/screenshots/dark_fav.png" width="70%" height="70%" alt="Dark favorites page">

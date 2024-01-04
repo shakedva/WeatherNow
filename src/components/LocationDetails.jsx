@@ -20,9 +20,9 @@ export default function LocationDetails({ location }) {
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         setSavedLocation(isSaved);
+        // Fetch when no data is saved in local storage
         const fetchCurrentConditions = async () => {
             try {
-
                 const response = await fetch(`${currentConditionsAddress}${location.key}?` + new URLSearchParams({
                     apikey: apiKey
                 }));
@@ -59,9 +59,9 @@ export default function LocationDetails({ location }) {
         }
     }
 
-    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" />
+    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" alt="Save bookmark"/>
     if (savedLocation)
-        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" />
+        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" alt="Unsave bookmark"/>
     const unit = getTemperatureUnit();
     const temperature = temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
     return (

@@ -14,7 +14,7 @@ export function convertISO8601ToDayOfTheWeek(originalDate) {
 export function convertCelsiusToFahrenheit(temperature) {
     return (temperature * (9/5) + 32).toFixed(2);
 }
-export function clearStorageAfterTtlMinutes(ttlMinutes = 480) {
+export function clearStorageAfterTtlMinutes(ttlMinutes = 10) {
     const now = new Date().getTime();
     const setupTime = localStorage.getItem('setupTime');
     if (setupTime == null) {

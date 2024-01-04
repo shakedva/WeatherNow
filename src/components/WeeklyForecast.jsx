@@ -50,8 +50,6 @@ export default function WeeklyForecast({ location }) {
         }
     }, [location]);
 
-
-
     return (
         <div id="weekly-forecast">
             <div className="container">

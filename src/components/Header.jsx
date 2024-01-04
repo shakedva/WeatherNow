@@ -12,9 +12,9 @@ export default function Header() {
     const { theme, toggleTheme } = useContext(ThemeContext);
     document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
 
-    let themeImg = <img src={lightModeImg} width="24" height="24" />
+    let themeImg = <img src={lightModeImg} width="24" height="24" alt="Light mode"/>
     if (theme === 'dark')
-        themeImg = <img src={darkModeImg} width="24" height="24" />
+        themeImg = <img src={darkModeImg} width="24" height="24" alt="Dark mode"/>
 
     return (
         <div id={theme}>
