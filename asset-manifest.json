@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Shaked-Vaknin-31-12-2023/static/css/main.b77c84fd.css",
-    "main.js": "/Shaked-Vaknin-31-12-2023/static/js/main.da11be62.js",
+    "main.js": "/Shaked-Vaknin-31-12-2023/static/js/main.293725d3.js",
     "static/js/787.42650831.chunk.js": "/Shaked-Vaknin-31-12-2023/static/js/787.42650831.chunk.js",
     "static/media/Mountain Layer View In Blue Tone.png": "/Shaked-Vaknin-31-12-2023/static/media/Mountain Layer View In Blue Tone.c57ab751f1ed4032931d.png",
     "static/media/Mountain Landscape In Orange Tone resized.svg": "/Shaked-Vaknin-31-12-2023/static/media/Mountain Landscape In Orange Tone resized.5e3743b7e1dc245e8de8.svg",
@@ -34,11 +34,11 @@
     "static/media/thermometer-mercury-cold.svg": "/Shaked-Vaknin-31-12-2023/static/media/thermometer-mercury-cold.ec60eeadb95954b73ead.svg",
     "static/media/thermometer-mercury.svg": "/Shaked-Vaknin-31-12-2023/static/media/thermometer-mercury.cfc9a03a91da89d1b2b9.svg",
     "main.b77c84fd.css.map": "/Shaked-Vaknin-31-12-2023/static/css/main.b77c84fd.css.map",
-    "main.da11be62.js.map": "/Shaked-Vaknin-31-12-2023/static/js/main.da11be62.js.map",
+    "main.293725d3.js.map": "/Shaked-Vaknin-31-12-2023/static/js/main.293725d3.js.map",
     "787.42650831.chunk.js.map": "/Shaked-Vaknin-31-12-2023/static/js/787.42650831.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b77c84fd.css",
-    "static/js/main.da11be62.js"
+    "static/js/main.293725d3.js"
   ]
 }
