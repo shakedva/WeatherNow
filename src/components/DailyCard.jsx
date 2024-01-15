@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import { convertCelsiusToFahrenheit, getWeatherIcon } from "../util.js";
+import { useSelector } from 'react-redux'
 
 export default function DailyCard({ dailyForecast }) {
-    const { temperatureUnit } = useContext(TemperatureContext);
+    const temperatureUnit = useSelector(state => state.temperature.temperatureUnit)
     const minimumTemp = dailyForecast.minimumTemperature;
     const maximumTemp = dailyForecast.maximumTemperature;
     const temperature = temperatureUnit === 'celsius' ?

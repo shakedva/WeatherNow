@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { currentConditionsAddress, apiKey, convertCelsiusToFahrenheit } from "../util";
 import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.jsx";
-import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
+import { getTemperatureSymbol } from "../store/temperature.js";
+import { useSelector } from 'react-redux'
 import bookmarkImg from '../assets/bookmark.svg';
 import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
 import './LocationDetails.css'
 import ErrorPage from "./ErrorPage.jsx";
+
+
 const DEFAULT_DETAILS = {
     text: '',
     temperature: 0,
@@ -16,7 +19,7 @@ export default function LocationDetails({ location }) {
     const [savedLocation, setSavedLocation] = useState(false);
     const [error, setError] = useState(false);
     const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
-    const { temperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
+    const temperatureUnit = useSelector(state => state.temperature.temperatureUnit)
     useEffect(() => {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         setSavedLocation(isSaved);
@@ -62,7 +65,7 @@ export default function LocationDetails({ location }) {
     let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" alt="Save bookmark"/>
     if (savedLocation)
         bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" alt="Unsave bookmark"/>
-    const unit = getTemperatureUnit();
+    const unit = getTemperatureSymbol(temperatureUnit);
     const temperature = temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
     return (
         <div className="card mt-3" id="location-details">

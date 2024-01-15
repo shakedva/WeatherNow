@@ -1,17 +1,15 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
 import { useDispatch, useSelector } from 'react-redux'
 import { themeActions } from "../store/theme.js";
+import { temperatureActions, getTemperatureSymbol } from "../store/temperature.js";
 import lightModeImg from '../assets/brightness-high-fill.svg';
 import darkModeImg from '../assets/cloud-moon-fill.svg';
 import './Header.css'
 
-
 export default function Header() {
-    const { toggleTemperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
     const dispatch = useDispatch();
     const theme = useSelector(state => state.theme.theme)
+    const temperatureUnit = useSelector(state => state.temperature.temperatureUnit)
 
     document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
 
@@ -21,6 +19,9 @@ export default function Header() {
 
     function handleToggle() {
         dispatch(themeActions.toggleTheme());
+    }
+    function handleToggleTemperatureUnit() {
+        dispatch(temperatureActions.toggleTemperatureUnit());
     }
     return (
         <div id={theme}>
@@ -44,8 +45,8 @@ export default function Header() {
                     <div className="btn-group me-0" role="group" aria-label="Default button group">
                         <button
                             className="btn btn-outline-secondary"
-                            onClick={toggleTemperatureUnit}>
-                            {getTemperatureUnit()}
+                            onClick={handleToggleTemperatureUnit}>
+                            {getTemperatureSymbol(temperatureUnit)}
                         </button>
                         <button
                             className="btn btn-outline-secondary"

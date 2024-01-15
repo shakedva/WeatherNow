@@ -3,7 +3,6 @@ import Header from './components/Header.jsx';
 import Favorites from './components/Favorites.jsx';
 import Home from './components/Home.jsx';
 import FavoriteLocationsProvider from "./contexts/FavoriteLocationsContext.jsx";
-import TemperatureProvider from "./contexts/TemperatureContext.jsx";
 import { clearStorageAfterTtlMinutes } from "./util.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import './App.css';
@@ -13,7 +12,6 @@ function App() {
   clearStorageAfterTtlMinutes();
   return (
       <FavoriteLocationsProvider>
-        <TemperatureProvider>
           <HashRouter>
             {/*Use HashRouter instead of BrowserRouter due to GitHub pages deploy requirements */}
             <Routes>
@@ -24,7 +22,6 @@ function App() {
               </Route>
             </Routes>
           </HashRouter>
-        </TemperatureProvider>
       </FavoriteLocationsProvider>
   );
 }

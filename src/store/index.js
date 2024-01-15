@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import themeReducer from './theme';
+import temperatureReducer from './temperature';
 
 const store = configureStore({
     reducer: {
-        theme: themeReducer
+        theme: themeReducer, 
+        temperature: temperatureReducer,
     }
 });
 
