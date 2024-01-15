@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'
-import { ThemeContext } from '../contexts/ThemeContext.jsx';
+import { useSelector } from 'react-redux'
 
 const WeatherChart = ({ forecast }) => {
-  const { theme } = useContext(ThemeContext);
+  const theme = useSelector(state => state.theme.theme)
+
   const [formattedForecast, setFormattedForecast] = useState({
     labels: [],
     datasets: [{

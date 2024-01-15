@@ -1,7 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { TemperatureContext } from "../contexts/TemperatureContext.jsx";
-import { ThemeContext } from "../contexts/ThemeContext.jsx";
+import { useDispatch, useSelector } from 'react-redux'
+import { themeActions } from "../store/theme.js";
 import lightModeImg from '../assets/brightness-high-fill.svg';
 import darkModeImg from '../assets/cloud-moon-fill.svg';
 import './Header.css'
@@ -9,13 +10,18 @@ import './Header.css'
 
 export default function Header() {
     const { toggleTemperatureUnit, getTemperatureUnit } = useContext(TemperatureContext);
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    const dispatch = useDispatch();
+    const theme = useSelector(state => state.theme.theme)
+
     document.body.style.backgroundColor = theme === 'light' ? '#ffdcbc' : '#0d1e31';
 
     let themeImg = <img src={lightModeImg} width="24" height="24" alt="Light mode"/>
     if (theme === 'dark')
         themeImg = <img src={darkModeImg} width="24" height="24" alt="Dark mode"/>
 
+    function handleToggle() {
+        dispatch(themeActions.toggleTheme());
+    }
     return (
         <div id={theme}>
             <header className='navbar d-flex sticky-top' id='header'>
@@ -43,7 +49,7 @@ export default function Header() {
                         </button>
                         <button
                             className="btn btn-outline-secondary"
-                            onClick={toggleTheme}>
+                            onClick={handleToggle}>
                             {themeImg}
                         </button>
                     </div>
