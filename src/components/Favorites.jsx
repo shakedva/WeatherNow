@@ -1,10 +1,10 @@
-import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.jsx";
-import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import LocationDetails from "./LocationDetails.jsx";
+import { useSelector } from 'react-redux'
+
 
 export default function Favorites() {
-    const { favorites } = useContext(FavoriteLocationsContext);
+    const favorites = useSelector(state => state.favoriteLocations.favorites)
     return (
         <div id="favorites">
             <div className="row">

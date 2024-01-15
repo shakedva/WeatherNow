@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { currentConditionsAddress, apiKey, convertCelsiusToFahrenheit } from "../util";
-import { FavoriteLocationsContext } from "../contexts/FavoriteLocationsContext.jsx";
 import { getTemperatureSymbol } from "../store/temperature.js";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { favoriteLocationsActions } from "../store/favoriteLocations.js";
 import bookmarkImg from '../assets/bookmark.svg';
 import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
 import './LocationDetails.css'
@@ -18,10 +18,11 @@ export default function LocationDetails({ location }) {
     const [details, setDetails] = useState(DEFAULT_DETAILS);
     const [savedLocation, setSavedLocation] = useState(false);
     const [error, setError] = useState(false);
-    const { addToFavorites, removeFromFavorites, favorites } = useContext(FavoriteLocationsContext);
+    const dispatch = useDispatch();
     const temperatureUnit = useSelector(state => state.temperature.temperatureUnit)
+    const favorites = useSelector(state => state.favoriteLocations.favorites);
     useEffect(() => {
-        const isSaved = favorites.some(favLocation => favLocation.key === location.key);
+        const isSaved = favorites.some(favLocation => favLocation.key === location.key); 
         setSavedLocation(isSaved);
         // Fetch when no data is saved in local storage
         const fetchCurrentConditions = async () => {
@@ -56,9 +57,9 @@ export default function LocationDetails({ location }) {
     function handleSaveLocation() {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         if (isSaved) {
-            removeFromFavorites(location)
+            dispatch(favoriteLocationsActions.removeFromFavorites(location));
         } else {
-            addToFavorites(location);
+            dispatch(favoriteLocationsActions.addToFavorites(location));
         }
     }
 
