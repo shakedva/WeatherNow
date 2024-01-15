@@ -20,6 +20,7 @@ function App() {
   clearStorageAfterTtlMinutes();
   useEffect(() => {
     function getUserCurrentPosition() {
+      dispatch(locationsActions.setSelectedLocation(DEFAULT_LOCATION));
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
