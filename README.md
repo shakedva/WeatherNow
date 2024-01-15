@@ -9,7 +9,7 @@ This is a simple, responsive web app built with React that allows users to check
 1. Weather Page:  Display weather information for a searched city.
 2. Favorites Page: Show a list of saved favorite cities. Users can add and remove cities from their favorites locally.
 
-## Pages
+## Features
 
 1. Geolocation API Integration: The app uses the Geolocation API to set the default location based on the user's device coordinates.
 2. Temperature Unit Toggle: Users can switch between Celsius and Fahrenheit

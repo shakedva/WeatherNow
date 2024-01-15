@@ -3,21 +3,22 @@ import { autocompleteAddress, apiKey } from "../util";
 import { useDispatch } from 'react-redux'
 import { locationsActions } from "../store/locations.js";
 import './SearchBar.css';
-
+import ErrorPage from "./ErrorPage.jsx";
 const DEBOUNCE_DELAY = 500;
 
 export default function SearchBar() {
     const [location, setLocation] = useState('');
     const [cities, setCities] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [error, setError] = useState(false);
     const dispatch = useDispatch();
     // Fetch suggestion from autocomplete api when input changes after debounce
     useEffect(() => {
         const getData = setTimeout(() => {
+            setError(false);
             if (location === '' || cities.some(location => location === `${location.localizedName}, ${location.country}`)) {
                 return;
             }
-
             fetch(`${autocompleteAddress}?` + new URLSearchParams({
                 apikey: apiKey,
                 q: location
@@ -33,7 +34,7 @@ export default function SearchBar() {
                     if (suggestions.length !== 0)
                         setShowSuggestions(true);
                 }).catch(function () {
-                    console.log(`servers are not available right now`)
+                    setError(true);
                 })
         }, DEBOUNCE_DELAY);
 
@@ -55,7 +56,6 @@ export default function SearchBar() {
     return (
         <div className="d-flex justify-content-center" id="search-bar">
             <div className="col-7">
-
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
@@ -64,7 +64,7 @@ export default function SearchBar() {
                     </span>
                     <input list="cities"
                         type="text"
-                        className="form-control"
+                        className={`form-control ${error ? `border border-danger` : undefined}`}
                         placeholder="Enter Location"
                         aria-label="Location"
                         value={location}
@@ -87,6 +87,7 @@ export default function SearchBar() {
                         )
                     })}
                 </ul>
+                {error && <div>Oops, something went wrong. Please try again later.</div>}
             </div>
         </div>
     )
