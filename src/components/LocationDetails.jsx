@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { currentConditionsAddress, apiKey, convertCelsiusToFahrenheit } from "../util";
 import { getTemperatureSymbol } from "../store/temperature.js";
 import { useSelector, useDispatch } from 'react-redux'
-import { favoriteLocationsActions } from "../store/favoriteLocations.js";
+import { locationsActions } from "../store/locations.js";
 import bookmarkImg from '../assets/bookmark.svg';
 import bookmarkFillImg from '../assets/bookmark-heart-fill.svg';
 import './LocationDetails.css'
@@ -20,9 +20,10 @@ export default function LocationDetails({ location }) {
     const [error, setError] = useState(false);
     const dispatch = useDispatch();
     const temperatureUnit = useSelector(state => state.temperature.temperatureUnit)
-    const favorites = useSelector(state => state.favoriteLocations.favorites);
+    const favorites = useSelector(state => state.locations.favorites);
+
     useEffect(() => {
-        const isSaved = favorites.some(favLocation => favLocation.key === location.key); 
+        const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         setSavedLocation(isSaved);
         // Fetch when no data is saved in local storage
         const fetchCurrentConditions = async () => {
@@ -57,17 +58,18 @@ export default function LocationDetails({ location }) {
     function handleSaveLocation() {
         const isSaved = favorites.some(favLocation => favLocation.key === location.key);
         if (isSaved) {
-            dispatch(favoriteLocationsActions.removeFromFavorites(location));
+            dispatch(locationsActions.removeFromFavorites(location));
         } else {
-            dispatch(favoriteLocationsActions.addToFavorites(location));
+            dispatch(locationsActions.addToFavorites(location));
         }
     }
 
-    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" alt="Save bookmark"/>
+    let bookmark = <img src={bookmarkImg} onClick={handleSaveLocation} width="32" height="32" alt="Save bookmark" />
     if (savedLocation)
-        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" alt="Unsave bookmark"/>
+        bookmark = <img src={bookmarkFillImg} onClick={handleSaveLocation} width="32" height="32" alt="Unsave bookmark" />
     const unit = getTemperatureSymbol(temperatureUnit);
     const temperature = temperatureUnit === 'celsius' ? `${details.temperature}${unit}` : `${convertCelsiusToFahrenheit(details.temperature)}${unit}`
+
     return (
         <div className="card mt-3" id="location-details">
             <div className="card-body">

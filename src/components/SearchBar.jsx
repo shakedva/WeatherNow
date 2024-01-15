@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react"
 import { autocompleteAddress, apiKey } from "../util";
+import { useDispatch } from 'react-redux'
+import { locationsActions } from "../store/locations.js";
 import './SearchBar.css';
 
 const DEBOUNCE_DELAY = 500;
 
-export default function SearchBar({ onLocationClicked }) {
+export default function SearchBar() {
     const [location, setLocation] = useState('');
     const [cities, setCities] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const dispatch = useDispatch();
     // Fetch suggestion from autocomplete api when input changes after debounce
     useEffect(() => {
         const getData = setTimeout(() => {
@@ -42,7 +45,7 @@ export default function SearchBar({ onLocationClicked }) {
         setLocation(location);
     }
     function handleSuggestionClicked(location) {
-        onLocationClicked(location);
+        dispatch(locationsActions.setSelectedLocation(location));
         setLocation(`${location.localizedName}, ${location.country}`);
         setShowSuggestions(false); // Close dropdown
     }

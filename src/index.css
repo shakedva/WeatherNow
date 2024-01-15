@@ -50,6 +50,18 @@ html, body {
   color: black;
   font-weight: bold;
 }
+.loading-text {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#light .loading-text {
+  color: #e5451c;
+}
+#dark .loading-text {
+  color: #d8e4fc;
+}
 
 @media screen and (min-device-width: 1024px) { 
   #location-details .card-title {

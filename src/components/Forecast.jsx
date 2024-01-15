@@ -1,6 +1,9 @@
 import LocationDetails from "./LocationDetails.jsx"
 import WeeklyForecast from "./WeeklyForecast.jsx"
-export default function Forecast({ location }) {
+import { useSelector } from 'react-redux'
+
+export default function Forecast() {
+    const location = useSelector(state => state.locations.selectedLocation);
 
     return (
         <div id="forecast">

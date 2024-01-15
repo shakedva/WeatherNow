@@ -1,27 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    favorites: []
+    favorites: [],
+    selectedLocation: null,
 }
 
-const favoriteLocationsSlice = createSlice({
-    name: 'favoriteLocations', 
+const locationsSlice = createSlice({
+    name: 'locations', 
     initialState,
     reducers: {
         addToFavorites(state, action){
             const updatedFavorites = [...state.favorites];
             if(!updatedFavorites.some(favLocation => favLocation.key === action.payload.key)) {
-                state.favorites.push({
+                updatedFavorites.push({
                     key: action.payload.key,
                     localizedName: action.payload.localizedName,
                 });
             }
+            state.favorites = updatedFavorites;
         },
         removeFromFavorites(state, action){
-            state.favorites.filter(favLocation => favLocation.key !== action.payload.key);
+            state.favorites = state.favorites.filter(favLocation => favLocation.key !== action.payload.key);
         },
+        setSelectedLocation(state, action) {
+            state.selectedLocation = action.payload;
+        }
     }
 });
 
-export const favoriteLocationsActions = favoriteLocationsSlice.actions;
-export default favoriteLocationsSlice.reducer;
+export const locationsActions = locationsSlice.actions;
+export default locationsSlice.reducer;
