@@ -2,7 +2,7 @@
 
 This is a simple, responsive web app built with React that allows users to check the weather for a specific city, save their favorite cities. The app utilizes the AccuWeather API for weather data.
 
- Demo available on [GitHub Pages.](https://shakedva.github.io/Shaked-Vaknin-31-12-2023/)
+ Demo available on [GitHub Pages.](https://shakedva.github.io/WeatherNow/)
 
 ## Pages
 
